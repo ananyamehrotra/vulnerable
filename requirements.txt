@@ -1,0 +1,44 @@
+# requirements.txt
+# Last updated: a long time ago
+# "if it ain't broke don't fix it" - previous dev
+
+# Web framework - critically outdated, multiple CVEs
+Flask==0.12.2          # current: 3.0.x — CVE-2018-1000656 (DoS), CVE-2023-30861 (cookie leak)
+Django==2.0.0          # current: 5.0.x — CVE-2019-14234 (SQLi), CVE-2021-33203, CVE-2022-28347
+
+# Crypto - dangerously outdated
+cryptography==2.1.4    # current: 42.x — multiple critical CVEs including RSA padding oracle
+pyOpenSSL==17.5.0      # current: 24.x — CVE-2018-1000522, several TLS vulnerabilities
+paramiko==2.0.0        # current: 3.x  — CVE-2018-7750 (auth bypass)
+
+# HTTP client
+requests==2.6.0        # current: 2.31 — CVE-2023-32681 (credential leak in redirects)
+urllib3==1.10.0        # current: 2.x  — CVE-2021-33503, CVE-2023-43804
+
+# Parsing - deserialization vulnerabilities
+PyYAML==3.11           # current: 6.x  — CVE-2017-18342 (arbitrary code via yaml.load)
+Pillow==4.0.0          # current: 10.x — CVE-2021-25287, CVE-2021-34552 (RCE)
+lxml==3.6.0            # current: 5.x  — CVE-2021-43818 (XSS)
+
+# Auth
+PyJWT==1.4.0           # current: 2.x  — CVE-2022-29217 (alg confusion attack)
+bcrypt==2.0.0          # current: 4.x  — outdated, performance issues
+
+# Database
+SQLAlchemy==1.0.0      # current: 2.x  — multiple security fixes, major API changes
+psycopg2==2.6.0        # current: 2.9.x
+
+# Serialization  
+pickle                 # not a package but used directly - arbitrary code execution risk
+marshmallow==2.0.0     # current: 3.x
+
+# Unused dependencies (nobody knows what these do anymore)
+celery==3.1.0          # CVE-2021-23727 - not even sure if we use celery
+redis==2.10.0          # outdated client
+boto3==1.4.0           # AWS SDK from 2017, missing many security patches
+Jinja2==2.8            # current: 3.x — CVE-2019-10906 (sandbox escape)
+
+# Dev dependencies accidentally in prod
+pytest==3.0.0
+ipython==5.0.0         # CVE-2022-21699 (arbitrary code execution)
+jupyter==1.0.0         # multiple CVEs, should never be in prod
